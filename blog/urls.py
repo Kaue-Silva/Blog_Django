@@ -28,6 +28,8 @@ urlpatterns = [
     path('blog/logout/', views.sair),
     path('blog/novo/', views.tela_postagem),
     path('blog/novo/submit', views.nova_postagem),
-    path('blog/postagens/', views.minhas_postagens)
+    path('blog/postagens/', views.postagens_listadas),
+    path('blog/minhaspostagens/', views.minhas_postagens),
+    path('blog/minhaspostagens/delete/<int:id_postagem>', views.delete_postagem)
 
 ]

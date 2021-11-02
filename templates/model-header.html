@@ -1,5 +1,11 @@
 <meta charset="utf-8">
 <style>
+        #login{
+            position: absolute;
+            top: 1%;
+            left: 96.2%;
+        }
+        
         #usuario {
             position: absolute;
             top: -1%;
@@ -14,29 +20,40 @@
         
         #minhas_postagens {
             position: absolute;
-            top:  12%;
+            top: 12%;
+            left: 90.4%;
+        }
+        
+        #postagens_listadas {
+            position: absolute;
+            top:  16%;
             left: 90%;
         }
         
         #inserir {
             position: absolute;
-            top: 16%;
-            left: 91.7%;
+            top: 20%;
+            left: 91.6%;
         }
         
         #sair {
             position: absolute ;
-            top: 20%;
+            top: 24%;
             left: 96.8%;
         }
 
 </style>
-
-<div align="left">
-    <p id="usuario">Usuario: {{usuario}}</p>
+{% if request.user == "AnonymousUser" %}
+    <a href="/login/"><button id="login">Login</button></a>
+{% endif %}
+<div align="left" {% if request.user == "AnonymousUser" %}
+    hidden
+    {% endif %}>
+    <p id="usuario"> Usuario: {{request.user}} </p>
     <a href="/"><button id="inicio">inicio</button></a>
+    <a href="/blog/minhaspostagens/"><button id="minhas_postagens">Minhas Postagens</button></a>
     <a href="/blog/novo/"><button id="inserir">Nova Postagem</button></a>
-    <a href="/blog/postagens/"><button id="minhas_postagens">Postagens Listadas</button></a>
+    <a href="/blog/postagens/"><button id="postagens_listadas">Postagens Listadas</button></a>
     <a href="/blog/logout/">
     <button id="sair">Sair</button></a>
 </div>

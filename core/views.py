@@ -34,13 +34,18 @@ def sair(request):
 
 def index(request):
     publicacoes = Postagem.objects.all()
-    usuario = request.user
-    dados = {'dados':publicacoes, 'usuario':usuario}
+    request.user = str(request.user)
+    dados = {'dados':publicacoes}
     return render(request, 'index.html', dados)
 
 @login_required(login_url="/login/")
 def tela_postagem(request):
-    return render(request, 'postagem.html')
+    id_postagem = request.GET.get('id')
+    dados = {}
+    if id_postagem:
+        dados['postagem'] = Postagem.objects.get(id=id_postagem)
+    return render(request, 'postagem.html', dados)
+
 
 @login_required(login_url="/login/")
 def nova_postagem(request):
@@ -49,22 +54,34 @@ def nova_postagem(request):
         descricao = request.POST.get('descricao')
         publico = request.POST.get('publico')
         autor = request.user
+        id_postagem = request.POST.get('id_postagem')
         if titulo == '' or titulo == None:
             titulo = 'Sem Titulo'
+        
         if publico == 'on':
             publico = True
+        
         else:
             publico = False
-        Postagem.objects.create(titulo=titulo, descricao=descricao, publico=publico, autor=autor)
+        
+        if id_postagem:
+            postagem = Postagem.objects.get(id=id_postagem)
+            if postagem.autor == autor:
+                postagem.titulo = titulo
+                postagem.descricao = descricao
+                postagem.publico = publico
+                postagem.save()
+        else:
+            Postagem.objects.create(titulo=titulo, descricao=descricao, publico=publico, autor=autor)
 
     return redirect('/')
 
 @login_required(login_url="/login/")
-def minhas_postagens(request):
+def postagens_listadas(request):
     autor = request.user
     postagens = Postagem.objects.filter(autor=autor, publico=False)
-    dados = {"dados":postagens, 'usuario':autor}
-    return render(request, "minhas_postagens.html", dados)
+    dados = {"dados":postagens}
+    return render(request, "postagens_listadas.html", dados)
 
 
 def registrar(request):
@@ -78,3 +95,19 @@ def registrar(request):
         except:
             messages.error(request=request, message="Usuario ja existe.")
             return redirect('/')
+
+
+@login_required(login_url="/login/")
+def minhas_postagens(request):
+    usuario = request.user
+    postagens = Postagem.objects.filter(autor=usuario)
+    dados = {"dados":postagens}
+    return render(request, "minhas_postagens.html", dados)
+
+
+@login_required(login_url="/login/")
+def delete_postagem(request, id_postagem):
+    usuario = request.user
+    postagem = Postagem.objects.filter(autor=usuario, id=id_postagem)
+    postagem.delete()
+    return redirect('/blog/minhaspostagens/')

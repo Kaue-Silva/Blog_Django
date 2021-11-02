@@ -7,14 +7,17 @@
 <body>
     <form action="submit" method="post"> {% csrf_token %}
         <label>Titulo:</label>
-        <input type="text" name="titulo">
+        <input type="number" name="id_postagem" value="{{ postagem.id }}" hidden>
+        <input type="text" name="titulo" value="{{ postagem.titulo }}">
         <br><br>
         <label>Descrição:</label>
         <br>
-        <textarea rows="15" cols="65" name="descricao"></textarea>
+        <textarea rows="15" cols="65" name="descricao">{{ postagem.descricao }}</textarea>
         <br>
         <label>Publico:</label>
-        <input type="checkbox" name="publico">
+        <input type="checkbox" name="publico" {% if postagem.publico %}
+                checked
+            {% endif %}>
         <br><br>
         <button type="submit">Enviar</button> <a href="/"><button>Cancelar</button></a>
     </form>

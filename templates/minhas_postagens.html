@@ -1,14 +1,16 @@
-{% include "model-page.html" %}
+{% extends "model-page.html" %}
 {% block content %}
-    {% for postagens in dados %}
-    <div>    
-        <h2>{{ postagens.titulo }}</h2>
+{% for postagens in dados %}
+    <div>
+        <h2>{{ postagens.titulo }} - <a href="/blog/novo/?id={{ postagens.id }}">(Editar</a> /
+                                     <a href="delete/{{ postagens.id }}">Excluir)</a> </h2> 
         <h4>Autor: {{ postagens.autor }}</h4>
         <p>{{ postagens.descricao }}</p>
         <p>Postagem Criada: {{ postagens.data_criacao }}</p>
-        <p>Publicação Listada - Somente Você Pode Ver</p>
-        <br>
+        {% if not postagens.publico %}
+            <p>Publicação Listada - Somente Você Pode Ver</p>
+        {% endif %}
     </div>
-    {% endfor %}
-
+</br>
+{% endfor %}
 {% endblock %}
