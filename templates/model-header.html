@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<style>
+        #usuario {
+            position: absolute;
+            top: -1%;
+            left: 89%;
+        }
+        
+        #inicio{
+            position: absolute;
+            top: 8%;
+            left: 96.2%;
+        }
+        
+        #minhas_postagens {
+            position: absolute;
+            top:  12%;
+            left: 90%;
+        }
+        
+        #inserir {
+            position: absolute;
+            top: 16%;
+            left: 91.7%;
+        }
+        
+        #sair {
+            position: absolute ;
+            top: 20%;
+            left: 96.8%;
+        }
+
+</style>
+
+<div align="left">
+    <p id="usuario">Usuario: {{usuario}}</p>
+    <a href="/"><button id="inicio">inicio</button></a>
+    <a href="/blog/novo/"><button id="inserir">Nova Postagem</button></a>
+    <a href="/blog/postagens/"><button id="minhas_postagens">Postagens Listadas</button></a>
+    <a href="/blog/logout/">
+    <button id="sair">Sair</button></a>
+</div>
+<h1>Blog Teste</h1>

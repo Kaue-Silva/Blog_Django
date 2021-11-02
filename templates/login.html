@@ -1,0 +1,22 @@
+<form method="post" action="submit"> {% csrf_token %}
+    <h1>Login:</h1>
+    <label>Usuario:</label>
+    <input type="username" name="username">
+    <label>Senha:</label>
+    <input type="password" name="password">
+    <button type="submit">Entrar</button>
+</form>
+
+<form method="post" action="register"> {% csrf_token %}
+    <h1>Cadastro:</h1>
+    <label>Usuario:</label>
+    <input type="username" name="username">
+    <label>Senha:</label>
+    <input type="password" name="password">
+    <button type="register">Registrar</button>
+</form>
+
+{% for message in messages %}
+    </br>
+    <strong>Mensagem:</strong> {{message}}
+{% endfor %}

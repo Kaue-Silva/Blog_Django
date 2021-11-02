@@ -1,0 +1,14 @@
+{% include "model-page.html" %}
+{% block content %}
+    {% for postagens in dados %}
+    <div>    
+        <h2>{{ postagens.titulo }}</h2>
+        <h4>Autor: {{ postagens.autor }}</h4>
+        <p>{{ postagens.descricao }}</p>
+        <p>Postagem Criada: {{ postagens.data_criacao }}</p>
+        <p>Publicação Listada - Somente Você Pode Ver</p>
+        <br>
+    </div>
+    {% endfor %}
+
+{% endblock %}

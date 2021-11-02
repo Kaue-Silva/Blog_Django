@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Publicação</title>
+</head>
+<body>
+    <form action="submit" method="post"> {% csrf_token %}
+        <label>Titulo:</label>
+        <input type="text" name="titulo">
+        <br><br>
+        <label>Descrição:</label>
+        <br>
+        <textarea rows="15" cols="65" name="descricao"></textarea>
+        <br>
+        <label>Publico:</label>
+        <input type="checkbox" name="publico">
+        <br><br>
+        <button type="submit">Enviar</button> <a href="/"><button>Cancelar</button></a>
+    </form>
+</body>
+</html>

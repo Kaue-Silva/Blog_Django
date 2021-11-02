@@ -1,0 +1,16 @@
+{% extends "model-page.html" %}
+{% block content %}
+
+{% for postagens in dados %}
+<div {% if postagens.get_postagem_publica %}
+                hidden
+        {% endif %}>
+        <h2>{{ postagens.titulo }}</h2>
+        <h4>Autor: {{ postagens.autor }}</h4>
+        <p>{{ postagens.descricao }}</p>
+        <p>Postagem Criada: {{ postagens.data_criacao }}</p>
+    </div>
+</br>
+{% endfor %}
+
+{% endblock %}
